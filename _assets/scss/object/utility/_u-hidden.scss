@@ -1,0 +1,33 @@
+@use "global" as *;
+
+// ----------
+// モバイルファースト用
+// ----------
+.u-hidden-pc {
+  @include mq('md') {
+    display: none;
+  }
+}
+
+.u-hidden-sp {
+  display: none;
+  @include mq('md') {
+    display: block;
+  }
+}
+
+// ----------
+// PCファースト用
+// ----------
+// .u-hidden-pc {
+//   display: none;
+//   @include max-screen(screen-size('md-less')) {
+//     display: block;
+//   }
+// }
+
+// .u-hidden-sp {
+//   @include max-screen(screen-size('md-less')) {
+//     display: none;
+//   }
+// }

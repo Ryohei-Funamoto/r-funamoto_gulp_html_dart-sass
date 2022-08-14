@@ -1,0 +1,184 @@
+@use "global" as *;
+
+// ----------
+// テキストボックス、テキストエリア
+// ----------
+/* テキストボックス、テキストエリアの初期化 */
+input[type="text"],
+input[type="email"],
+textarea {
+	appearance: none;
+	background-color: transparent;
+	background-image: none;
+	border: rem(1) solid rgba(0, 0, 0, 0.16);
+	border-radius: 0;
+	color: inherit;
+	font-family: inherit;
+	font-size: 1em;
+	padding: 0.4em 0.8em;
+	width: 100%;
+}
+
+textarea {
+  display: block; /* 下にできる余白を消す */
+  height: rem(150);
+  resize: vertical;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  border: rem(1) solid rgba(0, 0, 0, 0.32);
+  box-shadow: none;
+  outline: none;
+}
+
+/* Chromeの補完機能で背景色、文字色を変えないようにする */
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s !important;
+  -webkit-text-fill-color: #333333;
+}
+
+// ----------
+// ラジオボタン
+// ----------
+/* ラジオボタンの初期化 */
+input[type="radio"] {
+  opacity: 0;
+  margin: 0;
+  position: absolute;
+}
+
+// ----------
+// チェックボックス
+// ----------
+/* ラジオボタンの初期化 */
+input[type="checkbox"] {
+  opacity: 0;
+  margin: 0;
+  position: absolute;
+}
+
+// ----------
+// セレクトボックス
+// ----------
+/* セレクトボックスの初期化 */
+select {
+  appearance: none;
+  background-color: transparent;
+  background-image: none;
+  border: rem(1) solid rgba(0, 0, 0, 0.16);
+  border-radius: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  font-size: 1em;
+  padding: 0.4em 0.8em;
+  width: 100%;
+}
+
+/* IEの右端の矢印を消す */
+select::-ms-expand {
+  display: none;
+}
+
+/* セレクトボックスにフォーカスが当たった時のスタイル */
+select:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/* 最初の項目の文字色を変更（selectタグにrequired属性を指定） */
+select:invalid {
+  color: #A9A9A9;
+}
+
+// ----------
+// 送信ボタン
+// ----------
+input[type="submit"],
+input[type="button"] {
+  appearance: none;
+	background-color: rgba(0, 0, 0, 0.32);
+	background-image: none;
+	border: none;
+	border-radius: 0;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+  font-family: inherit;
+	font-size: 1em;
+	padding: 0.6em 2em;
+	text-decoration: none;
+}
+
+input[type="submit"]:focus,
+input[type="submit"]:hover,
+input[type="button"]:focus,
+input[type="button"]:hover {
+	outline: none;
+}
+
+input[type="submit"]::-moz-foucus-inner,
+input[type="button"]::-moz-foucus-inner {
+	border: none;
+	padding: 0;
+}
+
+button[type="submit"] {
+  appearance: none;
+  background-color: rgba(0, 0, 0, 0.32);
+  background-image: none;
+	border: none;
+  border-radius: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1em;
+	outline: none;
+  padding: 0.6em 2em;
+}
+
+// ----------
+// ファイル選択
+// ----------
+// input[type="file"] {
+//   position: absolute;
+//   opacity: 0;
+// }
+
+// .fileUpload {
+//   display: inline-block;
+//   padding: rem(10) rem(20);
+//   background-color: #3D98B4;
+//   color: #fff;
+//   cursor: pointer;
+// }
+
+// ----------
+// プレースホルダー
+// ----------
+::placeholder {
+  color: #A9A9A9;
+}
+
+/* 旧Edge対応 */
+::-ms-input-placeholder {
+  color: #A9A9A9;
+}
+
+/* IE対応 */
+:-ms-input-placeholder {
+  color: #A9A9A9;
+}
+
+// ----------
+// Chromeの補完機能の背景色＆テキスト
+// ----------
+/* Chromeの補完機能で背景色、文字色を変えないようにする */
+input:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s !important;
+  -webkit-text-fill-color: #333333;
+}

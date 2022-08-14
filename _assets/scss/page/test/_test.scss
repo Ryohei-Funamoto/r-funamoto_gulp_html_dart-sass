@@ -1,0 +1,19 @@
+@use "global" as *;
+
+.test {
+  background-color: red;
+  color: #FFFFFF;
+  display: grid;
+  font-size: rem(32);
+  font-weight: bold;
+  height: rem(200);
+  place-items: center;
+  width: rem(200);
+
+  @include mq('md') {
+    color: #333333;
+    font-size: rem(64);
+    height: rem(400);
+    width: rem(400);
+  }
+}

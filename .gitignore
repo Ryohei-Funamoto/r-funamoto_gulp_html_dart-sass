@@ -1,0 +1,15 @@
+_gulp/node_modules/
+_gulp/package-lock.json
+_static/dist/
+
+*.map
+
+!.gitkeep
+
+app/public/*
+!app/public/wp-content/
+app/public/wp-content/languages/
+app/public/wp-content/plugins/
+app/public/wp-content/uploads/
+app/public/wp-content/index.php
+app/public/wp-content/ewww/

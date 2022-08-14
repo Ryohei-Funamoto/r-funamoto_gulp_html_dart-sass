@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "sass:math";
+@use "variables" as *;
+
+// メディアクエリ
+@mixin mq($breakpoint: md) {
+  @media #{map.get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}
+
+// letter-spacingの算出
+@mixin letterSpacing($av) {
+  letter-spacing: math.div($av, 1000) * 1em;
+}
+
+// line-heightの算出
+@mixin lineHeight($font-size, $height) {
+  line-height: math.div($height, $font-size);
+}
+
+// line-heightの使用により生じるハーフ・レディングを消す
+// https://moshashugyo.com/media/line-height-space
+@mixin lineHeightSpaceFill($font-size, $height) {
+  $line-height: math.div($height, $font-size);
+
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+  }
+
+  &::before {
+    margin-top: calc((1 - #{$line-height}) * 0.5em);
+  }
+
+  &::after {
+    margin-bottom: calc((1 - #{$line-height}) * 0.5em);
+  }
+}
+
+// アスペクト比の算出
+@mixin paddingTopHack($side, $height) {
+  padding-top: math.div($height, $side) * 100%;
+}
+
+// text-indentの算出
+@mixin textIndent($av) {
+  text-indent: math.div($av, 1000) * 1em;
+}
