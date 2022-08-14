@@ -85,7 +85,7 @@ const notify = require('gulp-notify'); // エラー発生時のアラート出�
 const postcss = require('gulp-postcss');
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
 const remToPx = require('postcss-rem-to-pixel'); // remをpxに変換
-const mqpacker = require('css-mqpacker'); // メディアクエリをまとめる
+const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer'); // ベンダープレフィックス自動付与
 const TARGET_BROWSERS = [
@@ -130,7 +130,7 @@ const cssSass = () => {
         minRemValue: 0
       })
     ]))
-    .pipe(postcss([mqpacker()])) // メディアクエリをまとめる
+    .pipe(gcmq()) // メディアクエリをまとめる
     .pipe(sourcemaps.write('./'))
     .pipe(dest(distPath.css)) // コンパイル先(HTML)
     // .pipe(dest(serverDistPath.css)) // コンパイル先(WordPress)
