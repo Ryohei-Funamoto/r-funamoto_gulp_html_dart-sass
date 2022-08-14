@@ -33,12 +33,6 @@ textarea:focus {
   outline: none;
 }
 
-/* Chromeの補完機能で背景色、文字色を変えないようにする */
-input:-webkit-autofill {
-  transition: background-color 5000s ease-in-out 0s !important;
-  -webkit-text-fill-color: #333333;
-}
-
 // ----------
 // ラジオボタン
 // ----------
