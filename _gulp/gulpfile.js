@@ -84,7 +84,6 @@ const plumber = require('gulp-plumber'); // エラーが発生しても強制終
 const notify = require('gulp-notify'); // エラー発生時のアラート出力
 const postcss = require('gulp-postcss');
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
-const remToPx = require('postcss-rem-to-pixel'); // remをpxに変換
 const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer'); // ベンダープレフィックス自動付与
@@ -112,24 +111,6 @@ const cssSass = () => {
     }))
     .pipe(autoprefixer(TARGET_BROWSERS))
     .pipe(postcss([cssdeclsort({ order: 'alphabetical' })]))
-    .pipe(postcss([
-      remToPx({
-        rootValue: 16,
-        unitPrecision: 5,
-        propList: [
-          'font-size',
-          'height',
-          'margin',
-          'max-width',
-          'padding',
-          'width'
-        ],
-        selectorBlackList: [],
-        replace: true,
-        mediaQuery: true,
-        minRemValue: 0
-      })
-    ]))
     .pipe(gcmq()) // メディアクエリをまとめる
     .pipe(sourcemaps.write('./'))
     .pipe(dest(distPath.css)) // コンパイル先(HTML)
