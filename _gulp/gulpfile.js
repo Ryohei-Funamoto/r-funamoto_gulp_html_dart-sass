@@ -83,17 +83,10 @@ const sassGlob = require('gulp-sass-glob-use-forward'); // Dart SassでGlobを�
 const plumber = require('gulp-plumber'); // エラーが発生しても強制終了させない
 const notify = require('gulp-notify'); // エラー発生時のアラート出力
 const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer'); // ベンダープレフィックス自動付与
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
-const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
+const mmq = require('gulp-merge-media-queries'); // メディアクエリをまとめる
 const sourcemaps = require('gulp-sourcemaps');
-const autoprefixer = require('gulp-autoprefixer'); // ベンダープレフィックス自動付与
-const TARGET_BROWSERS = [
-  'last 2 versions',
-  '> 5%',
-  'ios >= 8',
-  'and_chr >= 5',
-  'Android >= 5'
-];
 
 
 const cssSass = () => {
@@ -109,9 +102,11 @@ const cssSass = () => {
       includePaths: ['_assets/scss'],
       outputStyle: 'expanded' // CSSを圧縮しない
     }))
-    .pipe(autoprefixer(TARGET_BROWSERS))
-    .pipe(postcss([cssdeclsort({ order: 'alphabetical' })]))
-    .pipe(gcmq()) // メディアクエリをまとめる
+    .pipe(postcss([
+      autoprefixer(),
+      cssdeclsort({ order: 'alphabetical' })
+    ]))
+    .pipe(mmq()) // メディアクエリをまとめる
     .pipe(sourcemaps.write('./'))
     .pipe(dest(distPath.css)) // コンパイル先(HTML)
     // .pipe(dest(serverDistPath.css)) // コンパイル先(WordPress)
