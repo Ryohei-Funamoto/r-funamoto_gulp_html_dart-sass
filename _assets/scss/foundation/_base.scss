@@ -1,5 +1,10 @@
 @use "global" as *;
 
+html,
+body {
+  min-height: 100vh;
+}
+
 // モバイルファースト用
 html {
 
@@ -63,8 +68,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: $color-white;
   overflow-wrap: break-word;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
 }
 
 
