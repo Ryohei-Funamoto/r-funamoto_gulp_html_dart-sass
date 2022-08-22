@@ -90,7 +90,7 @@ const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの�
 const mmq = require('gulp-merge-media-queries'); // メディアクエリをまとめる
 
 const cssSass = () => {
-  return src(srcPath.scss, { sourcemaps: true })
+  return src(srcPath.scss)
     .pipe(
       //エラーが出ても処理を止めない
       plumber({
@@ -106,7 +106,7 @@ const cssSass = () => {
       cssdeclsort({ order: 'alphabetical' })
     ]))
     .pipe(mmq()) // メディアクエリをまとめる
-    .pipe(dest(distPath.css, { sourcemaps: './' })) // コンパイル先(HTML)
+    .pipe(dest(distPath.css)) // コンパイル先(HTML)
     // .pipe(dest(serverDistPath.css, { sourcemaps: './' })) // コンパイル先(WordPress)
     .pipe(browserSync.stream())
     .pipe(notify({
