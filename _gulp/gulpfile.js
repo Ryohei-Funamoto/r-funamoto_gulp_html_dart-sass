@@ -88,11 +88,9 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer'); // ベンダープレフィックス自動付与
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
 const mmq = require('gulp-merge-media-queries'); // メディアクエリをまとめる
-const sourcemaps = require('gulp-sourcemaps');
 
 const cssSass = () => {
-  return src(srcPath.scss)
-    .pipe(sourcemaps.init())
+  return src(srcPath.scss, { sourcemaps: true })
     .pipe(
       //エラーが出ても処理を止めない
       plumber({
@@ -108,9 +106,8 @@ const cssSass = () => {
       cssdeclsort({ order: 'alphabetical' })
     ]))
     .pipe(mmq()) // メディアクエリをまとめる
-    .pipe(sourcemaps.write('./'))
-    .pipe(dest(distPath.css)) // コンパイル先(HTML)
-    // .pipe(dest(serverDistPath.css)) // コンパイル先(WordPress)
+    .pipe(dest(distPath.css, { sourcemaps: './' })) // コンパイル先(HTML)
+    // .pipe(dest(serverDistPath.css, { sourcemaps: './' })) // コンパイル先(WordPress)
     .pipe(browserSync.stream())
     .pipe(notify({
       message: 'Sassをコンパイルしました！',
