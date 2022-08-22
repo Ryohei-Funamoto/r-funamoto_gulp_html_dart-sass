@@ -80,7 +80,7 @@ const browserSyncReload = (done) => {
 /**
  * Sass
  */
-const dartSass = require('gulp-dart-sass'); // Dart SassはSass公式が推奨 @use構文などが使える
+const sass = require('gulp-dart-sass'); // Dart SassはSass公式が推奨 @use構文などが使える
 const sassGlob = require('gulp-sass-glob-use-forward'); // Dart SassでGlobを使う
 const plumber = require('gulp-plumber'); // エラーが発生しても強制終了させない
 const notify = require('gulp-notify'); // エラー発生時のアラート出力
@@ -97,7 +97,7 @@ const cssSass = () => {
         errorHandler: notify.onError('Error:<%= error.message %>')
       }))
     .pipe(sassGlob())
-    .pipe(dartSass.sync({
+    .pipe(sass.sync({
       includePaths: ['_assets/scss'],
       outputStyle: 'expanded' // CSSを圧縮しない
     }))
