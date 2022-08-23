@@ -89,10 +89,15 @@ const autoprefixer = require('autoprefixer'); // ベンダープレフィック�
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
 const sourcemaps = require('gulp-sourcemaps');
 const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
+const mode = require('gulp-mode')({
+  modes: ['production', 'development'],
+  default: 'development',
+  verbose: false
+});
 
 const cssSass = () => {
   return src(srcPath.scss)
-    .pipe(sourcemaps.init())
+    .pipe(mode.development(sourcemaps.init()))
     .pipe(
       //エラーが出ても処理を止めない
       plumber({
@@ -107,8 +112,8 @@ const cssSass = () => {
       autoprefixer(),
       cssdeclsort({ order: 'alphabetical' })
     ]))
-    .pipe(gcmq()) // メディアクエリをまとめる
-    .pipe(sourcemaps.write('./'))
+    .pipe(mode.production(gcmq())) // メディアクエリをまとめる
+    .pipe(mode.development(sourcemaps.write('./')))
     .pipe(dest(distPath.css)) // コンパイル先(HTML)
     // .pipe(dest(serverDistPath.css)) // コンパイル先(WordPress)
     .pipe(browserSync.stream())
