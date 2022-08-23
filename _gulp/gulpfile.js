@@ -87,10 +87,12 @@ const notify = require('gulp-notify'); // エラー発生時のアラート出�
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer'); // ベンダープレフィックス自動付与
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
+const sourcemaps = require('gulp-sourcemaps');
 const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
 
 const cssSass = () => {
   return src(srcPath.scss)
+    .pipe(sourcemaps.init())
     .pipe(
       //エラーが出ても処理を止めない
       plumber({
@@ -106,6 +108,7 @@ const cssSass = () => {
       cssdeclsort({ order: 'alphabetical' })
     ]))
     .pipe(gcmq()) // メディアクエリをまとめる
+    .pipe(sourcemaps.write('./'))
     .pipe(dest(distPath.css)) // コンパイル先(HTML)
     // .pipe(dest(serverDistPath.css)) // コンパイル先(WordPress)
     .pipe(browserSync.stream())
