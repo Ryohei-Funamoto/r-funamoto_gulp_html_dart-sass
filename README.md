@@ -1,12 +1,16 @@
 # R-Funamoto_Gulp_Dart-Sass_HTML
-* 当ファイルはDart Sass, Pug対応のgulpfileです。
+* 当ファイルはDart Sass, HTML対応のgulpfileです。
 
 ## 手順
-1. ターミナルを起動する。
-2. cdコマンドで_gulpフォルダに移動する。
-3. 「npm i」コマンドを実行し、package-lock.jsonとnode_modulesを生成する。
-4. 開発時は「npx gulp」コマンドを入力する。
-5. 本番公開時は「npx gulp --production」コマンドを入力する。
+1. ターミナルを開きます。
+2. cdコマンドで_gulpフォルダに移動します。
+3. `npm i`コマンドを実行し、package-lock.jsonとnode_modulesを生成します。
+4. `npm run dev`コマンドで開発環境を起動します。
+  * CSS非圧縮
+  * css.map作成
+5. `npm run pro`コマンドで本番環境用ファイルを出力します。
+  * CSS非圧縮
+  * css.mapを作成しない
 
 ## 注意点
 * 開発フォルダは_assetsです。

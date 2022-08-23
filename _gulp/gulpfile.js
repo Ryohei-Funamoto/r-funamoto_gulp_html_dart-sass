@@ -35,6 +35,21 @@ const serverDistPath = {
   'img': serverBase + '/img/'
 };
 
+// 本番とテストの設定
+const env = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : '';
+
+// 本番環境用設定
+if (env === 'production') {
+  // thisCssStyle = 'compressed'; // css圧縮する
+  thisCssStyle = 'expanded'; // css圧縮しない
+  thisCssMap = false; // css.mapを作成しない
+}
+// テスト環境用設定
+else if (env === 'development') {
+  thisCssStyle = 'expanded'; // css圧縮しない
+  thisCssMap = true; // css.mapを作成する
+}
+
 /**
  * clean
  */
@@ -87,7 +102,6 @@ const notify = require('gulp-notify'); // エラー発生時のアラート出�
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer'); // ベンダープレフィックス自動付与
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
-const sourcemaps = require('gulp-sourcemaps');
 const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
 const mode = require('gulp-mode')({
   modes: ['production', 'development'],
@@ -96,8 +110,7 @@ const mode = require('gulp-mode')({
 });
 
 const cssSass = () => {
-  return src(srcPath.scss)
-    .pipe(mode.development(sourcemaps.init()))
+  return src(srcPath.scss, { sourcemaps: thisCssMap })
     .pipe(
       //エラーが出ても処理を止めない
       plumber({
@@ -106,16 +119,15 @@ const cssSass = () => {
     .pipe(sassGlob())
     .pipe(sass.sync({
       includePaths: ['_assets/scss'],
-      outputStyle: 'expanded' // CSSを圧縮しない
+      outputStyle: thisCssStyle // CSSを圧縮しない
     }))
     .pipe(postcss([
       autoprefixer(),
       cssdeclsort({ order: 'alphabetical' })
     ]))
     .pipe(mode.production(gcmq())) // メディアクエリをまとめる
-    .pipe(mode.development(sourcemaps.write('./')))
-    .pipe(dest(distPath.css)) // コンパイル先(HTML)
-    // .pipe(dest(serverDistPath.css)) // コンパイル先(WordPress)
+    .pipe(dest(distPath.css, { sourcemaps: './' })) // コンパイル先(HTML)
+    // .pipe(dest(serverDistPath.css, { sourcemaps: './' })) // コンパイル先(WordPress)
     .pipe(browserSync.stream())
     .pipe(notify({
       message: 'Sassをコンパイルしました！',
@@ -196,7 +208,7 @@ const watchFiles = () => {
  * series -> 順番に実行
  * parallel -> 並列で実行
  */
-exports.default = series(
-  series(clean, cssSass, js, imgImagemin, html, public_file),
-  parallel(watchFiles, browserSyncFunc)
-);
+module.exports = {
+  default: series(series(clean, cssSass, js, imgImagemin, html, public_file), parallel(watchFiles, browserSyncFunc)),
+  build: series(series(clean, cssSass, js, imgImagemin, html, public_file))
+};
