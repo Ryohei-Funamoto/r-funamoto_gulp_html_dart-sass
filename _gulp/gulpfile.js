@@ -190,6 +190,19 @@ const public_file = () => {
 };
 
 /**
+ * キャッシュクリア
+ */
+const crypto = require('crypto');
+const hash = crypto.randomBytes(8).toString('hex');
+const replace = require('gulp-replace');
+
+const cacheBusting = () => {
+  return src(distBase + '/**/*.html')
+    .pipe(replace(/\.(js|css)\?ver/g, '.$1?ver=' + hash))
+    .pipe(dest(distPath.html))
+};
+
+/**
  * ファイル監視
  * ファイルの変更を検知すると、browserSyncReloadでreloadメソッドを呼び出す
  * watch('監視するファイル', 処理)
@@ -210,5 +223,5 @@ const watchFiles = () => {
  */
 module.exports = {
   default: series(series(clean, cssSass, js, imgImagemin, html, public_file), parallel(watchFiles, browserSyncFunc)),
-  build: series(series(clean, cssSass, js, imgImagemin, html, public_file))
+  build: series(series(clean, cssSass, js, imgImagemin, html, public_file, cacheBusting))
 };

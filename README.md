@@ -6,11 +6,12 @@
 2. cdコマンドで_gulpフォルダに移動します。
 3. `npm i`コマンドを実行し、package-lock.jsonとnode_modulesを生成します。
 4. `npm run dev`コマンドで開発環境を起動します。
-  * CSS非圧縮
-  * css.map作成
+* CSS非圧縮
+* css.map作成
 5. `npm run pro`コマンドで本番環境用ファイルを出力します。
-  * CSS非圧縮
-  * css.mapを作成しない
+* CSS非圧縮
+* css.mapを作成しない
+* 自動キャッシュクリア
 
 ## 注意点
 * 開発フォルダは_assetsです。
