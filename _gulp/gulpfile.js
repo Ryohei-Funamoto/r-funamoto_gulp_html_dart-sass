@@ -35,6 +35,11 @@ const serverDistPath = {
   'img': serverBase + '/img/'
 };
 
+// キャッシュクリアの際に読み込むファイルのパス
+const cachePath = {
+  'html': distBase + '/**/*.html'
+};
+
 // 本番とテストの設定
 const env = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : '';
 
@@ -195,7 +200,7 @@ const hash = crypto.randomBytes(8).toString('hex');
 const replace = require('gulp-replace');
 
 const cacheBusting = () => {
-  return src(distBase + '/**/*.html')
+  return src(cachePath.html)
     .pipe(replace(/\.(js|css)\?ver/g, '.$1?ver=' + hash))
     .pipe(dest(distPath.html))
 };
