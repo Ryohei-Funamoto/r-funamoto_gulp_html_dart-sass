@@ -43,11 +43,13 @@ if (env === 'production') {
   // thisCssStyle = 'compressed'; // css圧縮する
   thisCssStyle = 'expanded'; // css圧縮しない
   thisCssMap = false; // css.mapを作成しない
+  thisCssGroupMediaQueries = true; // メディアクエリをまとめる
 }
 // テスト環境用設定
 else if (env === 'development') {
   thisCssStyle = 'expanded'; // css圧縮しない
   thisCssMap = true; // css.mapを作成する
+  thisCssGroupMediaQueries = false; // メディアクエリをまとめない
 }
 
 /**
@@ -103,11 +105,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer'); // ベンダープレフィックス自動付与
 const cssdeclsort = require('css-declaration-sorter'); // CSSプロパティの順番を設定
 const gcmq = require('gulp-group-css-media-queries'); // メディアクエリをまとめる
-const mode = require('gulp-mode')({
-  modes: ['production', 'development'],
-  default: 'development',
-  verbose: false
-});
+const gulpif = require('gulp-if');
 
 const cssSass = () => {
   return src(srcPath.scss, { sourcemaps: thisCssMap })
@@ -125,7 +123,7 @@ const cssSass = () => {
       autoprefixer(),
       cssdeclsort({ order: 'alphabetical' })
     ]))
-    .pipe(mode.production(gcmq())) // メディアクエリをまとめる
+    .pipe(gulpif(thisCssGroupMediaQueries, gcmq())) // メディアクエリをまとめる
     .pipe(dest(distPath.css, { sourcemaps: './' })) // コンパイル先(HTML)
     // .pipe(dest(serverDistPath.css, { sourcemaps: './' })) // コンパイル先(WordPress)
     .pipe(browserSync.stream())
