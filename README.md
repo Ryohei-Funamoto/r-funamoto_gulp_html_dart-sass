@@ -1,4 +1,4 @@
-# R-Funamoto_Gulp_Dart-Sass_HTML
+# r-funamoto_gulp_dart-sass_html
 * 当ファイルはDart Sass, HTML対応のgulpfileです。
 
 ## 手順
