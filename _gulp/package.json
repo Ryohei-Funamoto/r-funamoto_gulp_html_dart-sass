@@ -1,5 +1,5 @@
 {
-  "name": "R-Funamoto_Gulp_Dart-Sass_HTML",
+  "name": "r-funamoto_gulp_dart-sass_html",
   "version": "1.0.0",
   "description": "Dart Sass対応HTML用gulpfile",
   "main": "index.js",
