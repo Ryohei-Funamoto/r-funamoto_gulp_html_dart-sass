@@ -1,11 +1,11 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 
 // 入出力するフォルダを指定
-const srcBase = '../_static/src';
-const assetsBase = '../_assets';
-const publicBase = '../_assets/public';
-const distBase = '../_static/dist';
-const serverBase = '../app/public/wp-content/themes/dummy'; // Local by Flywheelのパス
+const srcBase = './static/src';
+const assetsBase = './assets';
+const publicBase = './assets/public';
+const distBase = './static/dist';
+const serverBase = './app/public/wp-content/themes/dummy'; // Local by Flywheelのパス
 
 // 既存のファイルの読み込みパス
 const publicPath = {
@@ -119,7 +119,7 @@ const cssSass = () => {
       }))
     .pipe(sassGlob())
     .pipe(sass.sync({
-      includePaths: ['_assets/scss'],
+      includePaths: ['assets/scss'],
       outputStyle: thisCssStyle // CSSを圧縮しない
     }))
     .pipe(postcss([

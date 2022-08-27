@@ -3,21 +3,20 @@
 
 ## 手順
 1. ターミナルを開きます。
-2. cdコマンドで_gulpフォルダに移動します。
-3. `npm i`コマンドを実行し、package-lock.jsonとnode_modulesを生成します。
-4. `npm run dev`コマンドで開発環境を起動します。
+2. `npm i`コマンドを実行し、package-lock.jsonとnode_modulesを生成します。
+3. `npm run dev`コマンドで開発環境を起動します。
 * CSS非圧縮
 * css.map作成
 * メディアクエリをまとめない
-5. `npm run prod`コマンドで本番環境用ファイルを出力します。
+4. `npm run prod`コマンドで本番環境用ファイルを出力します。
 * CSS非圧縮
 * css.mapを作成しない
 * メディアクエリをまとめる
 * 自動キャッシュクリア
 
 ## 注意点
-* 開発フォルダは_assetsです。
-* _assetsフォルダ内のファイルは_static/distフォルダに吐き出されます。
+* 開発フォルダはassetsです。
+* assetsフォルダ内のファイルはstatic/distフォルダに吐き出されます。
 
 ## Nodeについて
 * node v16.14.0にて動作を確認済。
