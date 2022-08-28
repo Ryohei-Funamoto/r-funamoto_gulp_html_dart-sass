@@ -18,6 +18,19 @@ const srcPath = {
   'js': assetsBase + '/js/**/*.js',
   'img': assetsBase + '/img/**/*',
   'html': srcBase + '/**/*.html',
+  'ejs': [assetsBase + '/ejs/**/*.ejs', '!' + assetsBase + '/ejs/**/_*.ejs'],
+  'pug': [assetsBase + '/pug/**/*.pug', '!' + assetsBase + '/pug/**/_*.pug']
+};
+
+// 監視ファイルのパス
+const watchPath = {
+  'ejs': [assetsBase + '/ejs/**/*.ejs', assetsBase + '/data/**/*.json'],
+  'pug': [assetsBase + '/pug/**/*.pug', assetsBase + '/data/**/*.json']
+};
+
+// JSONデータのパス
+const dataPath = {
+  'data': assetsBase + '/data/site.json'
 };
 
 // ファイルの吐き出し先パス
