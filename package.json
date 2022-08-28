@@ -1,7 +1,7 @@
 {
-  "name": "r-funamoto_gulp_dart-sass_html",
+  "name": "r-funamoto_gulp_html_dart-sass",
   "version": "1.0.0",
-  "description": "Dart Sass対応HTML用gulpfile",
+  "description": "HTML, Dart Sass対応Gulpファイル",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development gulp",
