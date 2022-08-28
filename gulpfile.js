@@ -191,11 +191,77 @@ const public_file = () => {
 };
 
 /**
+ * EJS
+ */
+const ejs = require('gulp-ejs');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const htmlbeautify = require('gulp-html-beautify');
+const fs = require('fs');
+
+const ejsHTML = () => {
+  const json = JSON.parse(fs.readFileSync(dataPath.data));
+
+  return src(srcPath.ejs)
+    .pipe(
+      // エラーが出ても処理を止めない
+      plumber({
+        errorHandler: notify.onError('Error:<%= error.message %>')
+      }))
+    .pipe(
+      ejs({
+        jsonData: json
+      }))
+    .pipe(
+      htmlbeautify({
+        indent_size: 2, // インデントサイズ
+        indent_char: ' ', // インデントに使う文字列を半角スペース1個分に
+        max_preserve_newlines: 0, // 許容する連続改行数
+        preserve_newlines: true, // コンパイル前のコード改行
+        indent_inner_html: false, // head, bodyをインデント
+        extra_liners: [] // 終了タグの前に改行を入れるタグを配列で指定。head, body, htmlの前で改行しない場合は[]を指定
+      })
+    )
+    .pipe(rename({ extname: '.html' }))
+    .pipe(replace(/[\s\S]*?(<!DOCTYPE)/, '$1'))
+    .pipe(dest(distPath.ejs))
+    .pipe(notify({
+      message: 'HTMLをコンパイルしました！',
+      onLast: true
+    }))
+};
+
+/**
+ * Pug
+ */
+const pug = require('gulp-pug');
+
+const pugHTML = () => {
+  const json = JSON.parse(fs.readFileSync(dataPath.data));
+
+  return src(srcPath.pug)
+    .pipe(
+      // エラーが出ても処理を止めない
+      plumber({
+        errorHandler: notify.onError('Error:<%= error.message %>')
+      }))
+    .pipe(
+      pug({
+        locals: json,
+        pretty: true
+      }))
+    .pipe(dest(distPath.pug))
+    .pipe(notify({
+      message: 'HTMLをコンパイルしました！',
+      onLast: true
+    }))
+};
+
+/**
  * キャッシュクリア
  */
 const crypto = require('crypto');
 const hash = crypto.randomBytes(8).toString('hex');
-const replace = require('gulp-replace');
 
 const cacheBusting = () => {
   return src(cachePath.html)
@@ -215,6 +281,8 @@ const watchFiles = () => {
   watch(srcPath.img, series(imgImagemin, browserSyncReload))
   watch(srcPath.html, series(html, browserSyncReload))
   watch(publicPath.public, series(public_file, browserSyncReload))
+  // watch(watchPath.ejs, series(ejsHTML, browserSyncReload))
+  // watch(watchPath.pug, series(pugHTML, browserSyncReload))
 };
 
 /**
