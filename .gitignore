@@ -1,6 +1,6 @@
 node_modules/
 package-lock.json
-static/dist/
+dist/
 
 *.map
 
@@ -13,3 +13,7 @@ app/public/wp-content/plugins/
 app/public/wp-content/uploads/
 app/public/wp-content/index.php
 app/public/wp-content/ewww/
+
+app/public/wp-content/themes/dummy/css
+app/public/wp-content/themes/dummy/js
+app/public/wp-content/themes/dummy/img

@@ -1,10 +1,9 @@
 const { src, dest, watch, series, parallel } = require('gulp');
 
 // 入出力するフォルダを指定
-const srcBase = './static/src';
-const assetsBase = './assets';
-const publicBase = './assets/public';
-const distBase = './static/dist';
+const srcBase = './src';
+const publicBase = './src/public';
+const distBase = './dist';
 const serverBase = './app/public/wp-content/themes/dummy'; // Local by Flywheelのパス
 
 // 既存のファイルの読み込みパス
@@ -14,23 +13,23 @@ const publicPath = {
 
 // ファイルの読み込みパス
 const srcPath = {
-  'scss': assetsBase + '/scss/**/*.scss',
-  'js': assetsBase + '/js/**/*.js',
-  'img': assetsBase + '/img/**/*',
+  'scss': srcBase + '/scss/**/*.scss',
+  'js': srcBase + '/js/**/*.js',
+  'img': srcBase + '/img/**/*',
   'html': srcBase + '/**/*.html',
-  'ejs': [assetsBase + '/ejs/**/*.ejs', '!' + assetsBase + '/ejs/**/_*.ejs'],
-  'pug': [assetsBase + '/pug/**/*.pug', '!' + assetsBase + '/pug/**/_*.pug']
+  'ejs': [srcBase + '/ejs/**/*.ejs', '!' + srcBase + '/ejs/**/_*.ejs'],
+  'pug': [srcBase + '/pug/**/*.pug', '!' + srcBase + '/pug/**/_*.pug']
 };
 
 // 監視ファイルのパス
 const watchPath = {
-  'ejs': [assetsBase + '/ejs/**/*.ejs', assetsBase + '/data/**/*.json'],
-  'pug': [assetsBase + '/pug/**/*.pug', assetsBase + '/data/**/*.json']
+  'ejs': [srcBase + '/ejs/**/*.ejs', srcBase + '/data/**/*.json'],
+  'pug': [srcBase + '/pug/**/*.pug', srcBase + '/data/**/*.json']
 };
 
 // JSONデータのパス
 const dataPath = {
-  'data': assetsBase + '/data/site.json'
+  'data': srcBase + '/data/site.json'
 };
 
 // ファイルの吐き出し先パス
@@ -132,7 +131,7 @@ const cssSass = () => {
       }))
     .pipe(sassGlob())
     .pipe(sass.sync({
-      includePaths: ['assets/scss'],
+      includePaths: ['src/scss'],
       outputStyle: thisCssStyle
     }))
     .pipe(postcss([
