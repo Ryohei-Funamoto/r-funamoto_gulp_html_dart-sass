@@ -1,23 +1,36 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function () {
+(function () {
   /**
-   * トップへ戻るボタン
+   * DOM
    */
-  const toTop = document.querySelector('.js-to-top');
+  // トップへ戻るボタン
+  const btnToTop = document.querySelector('.js-button-to-top');
 
-  window.addEventListener('scroll', () => {
+  /**
+   * 関数
+   */
+  // トップへ戻るボタンの表示・非表示
+  const btnToTopToggle = function () {
     if (window.pageYOffset > 300) {
-      toTop.classList.add('is-show');
+      btnToTop.classList.add('is-show');
     } else {
-      toTop.classList.remove('is-show');
+      btnToTop.classList.remove('is-show');
     }
-  });
-
-  toTop.addEventListener('click', () => {
+  }
+  // ページトップへ戻る動き
+  const scrollToTop = function () {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
-  });
-});
+  }
+
+  /**
+   * イベント
+   */
+  // ウィンドウのスクロールによるトップへ戻るボタンの表示・非表示
+  window.addEventListener('scroll', btnToTopToggle);
+  // トップへ戻るボタンのクリックによりページトップへ戻る
+  btnToTop.addEventListener('click', scrollToTop);
+})();

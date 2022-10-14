@@ -1,18 +1,18 @@
 @use "global" as *;
 
-.c-to-top {
+.c-button-to-top {
   background-color: $color-black;
   opacity: 0;
   visibility: hidden;
   transition: opacity $duration, visibility $duration;
 }
 
-.c-to-top.is-show {
+.c-button-to-top.is-show {
   opacity: 1;
   visibility: visible;
 }
 
-.c-to-top::before {
+.c-button-to-top::before {
   border-left: rem(2) solid $color-white;
   border-top: rem(2) solid $color-white;
   content: '';
