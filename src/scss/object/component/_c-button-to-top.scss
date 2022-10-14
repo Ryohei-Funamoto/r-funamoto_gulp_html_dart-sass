@@ -4,7 +4,7 @@
   background-color: $color-black;
   opacity: 0;
   visibility: hidden;
-  transition: opacity $duration, visibility $duration;
+  transition: opacity $trs-duration, visibility $trs-duration;
 }
 
 .c-button-to-top.is-show {
