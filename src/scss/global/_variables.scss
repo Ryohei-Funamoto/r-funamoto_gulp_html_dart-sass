@@ -110,14 +110,12 @@ $line-height-base: 1.5;
 // ----------
 // color
 // ----------
-//main
 $color-main: #00A1E9 !default;
-$color-main-accent: #EFA545 !default;
-$color-main-dark: #002241 !default;
-$color-main-base: #E6F1FE !default;
-$color-main-base02: #EBEBF2 !default;
+$color-sub: #002241 !default;
+$color-accent: #EFA545 !default;
+$color-active: #2A96F8 !default;
 
-//グレースケール
+// グレースケール
 $color-black: #000000 !default;
 $color-gray-800: #333333 !default;
 $color-gray-600: #666666 !default;
@@ -125,13 +123,14 @@ $color-gray-400: #999999 !default;
 $color-gray-200: #CCCCCC !default;
 $color-white: #FFFFFF !default;
 
-//文字
+// 文字
 $color-text: #2B3033 !default;
 $color-text02: #8B90A0 !default;
 
-$color-active: #2A96F8 !default;
+// 背景色
+$color-bg: #FFFFFF;
 
-//SNS
+// SNS
 $color-sns-facebook: #375B95 !default;
 $color-sns-twitter: #4BAEEA !default;
 $color-sns-line: #04BB00 !default;
